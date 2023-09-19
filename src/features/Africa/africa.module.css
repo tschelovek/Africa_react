@@ -1,0 +1,7 @@
+/*.canvas path[data-country-id] {*/
+/*    transition: fill 0.2s;*/
+/*    cursor: pointer;*/
+/*}*/
+/*.canvas path[data-country-id].highlighted {*/
+/*    fill: rosybrown;*/
+/*}*/
