@@ -25,9 +25,9 @@
   font-weight: 600;
   line-height: 120%;
 }
-.hero__map__wrapper {
+.hero__map {
   flex-shrink: 0;
 }
-.hero__map__wrapper svg {
+.hero__map svg {
   max-inline-size: 100%;
 }

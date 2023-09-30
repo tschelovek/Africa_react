@@ -20,7 +20,7 @@ export function Hero({ children }: IHeroProps) {
               <button className={styles.btn}>Начать обучение</button>
             </div>
           </div>
-          <div className={styles.hero__map__wrapper}>{children}</div>
+          <div className={styles.hero__map}>{children}</div>
         </div>
         <div>
           <p>

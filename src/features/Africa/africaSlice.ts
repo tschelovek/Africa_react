@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "../../app/store"
 
-export type TCountriesId =
+export type TCountryId =
   | "algeria"
   | "kenya"
   | "niger"
@@ -9,36 +9,28 @@ export type TCountriesId =
   | "tanzania"
   | "zimbabwe"
 
-export interface ICountryState {
-  id: TCountriesId
-  isHover: boolean
-}
+export type TCountryName =
+  | "People's Democratic Republic of Algeria"
+  | "Republic of Kenya"
+  | "Republic of the Niger"
+  | "Republic of South Africa"
+  | "United Republic of Tanzania"
+  | "Republic of Zimbabwe"
 
 export interface ICountryState {
-  id: TCountriesId
+  id: TCountryId
   isHover: boolean
+  name?: TCountryName
 }
 
 export interface IAfricaState {
-  countries: Array<ICountryState>
-}
-
-export interface IAfricaObjectState {
   countries: {
-    [id in TCountriesId]: ICountryState
+    [id in TCountryId]: ICountryState
   }
 }
 
 const initialState: IAfricaState = {
-  // countries: [
-  //   { id: "algeria", isHover: false },
-  //   { id: "kenya", isHover: false },
-  //   { id: "niger", isHover: false },
-  //   { id: "sa", isHover: false },
-  //   { id: "tanzania", isHover: false },
-  //   { id: "zimbabwe", isHover: false },
-  // ],
-  countries2: {
+  countries: {
     algeria: { id: "algeria", isHover: false },
     kenya: { id: "kenya", isHover: false },
     niger: { id: "niger", isHover: false },
@@ -52,36 +44,19 @@ export const africaSlice = createSlice({
   name: "africa",
   initialState,
   reducers: {
-    hoverCountry: (state, action: PayloadAction<string>) => {
-      state.countries.map((country) =>
-        country.id === action.payload ? (country.isHover = true) : null,
-      )
-      // state.countries.map((country) => (country[action.payload].isHover = true))
+    hoverCountry: (state, action: PayloadAction<TCountryId>) => {
+      state.countries[action.payload].isHover = true
     },
-    unHoverCountry: (state, action: PayloadAction<string>) => {
-      state.countries.map((country) =>
-        country.id === action.payload ? (country.isHover = false) : null,
-      )
+    unHoverCountry: (state, action: PayloadAction<TCountryId>) => {
+      state.countries[action.payload].isHover = false
     },
   },
 })
 
-export const selectCountries = (state: RootState) => state.africa.countries
-// const selectorIsHoverById = (countries: [], id: string) =>
-//   countries.map((country) => country[id]?.isHover)
-// const selectCountries = state.africa.countries;
-// export const selectorCountryById = (
-//   state.africa.countries,
-//   id: TCountriesId,
-// ) => countries.map((country) => (country.id = id))
-export const selectCountryById = (state: RootState, countryId: TCountriesId) =>
-  state.africa.countries.find((country) => country.id === countryId)
-// export const selectorIsHoverById = createSelector([
-//   selectCountries,
-//   selectorCountryById,
-// ])
-// export const selectIsHoverById = (state: RootState, countryId: TCountriesId) =>
-//   state.africa.countries.find((country) => country.id === countryId).isHover
+export const selectCountryById = (state: RootState, countryId: TCountryId) =>
+  state.africa.countries[countryId]
+export const selectIsHoverById = (state: RootState, countryId: TCountryId) =>
+  state.africa.countries[countryId].isHover
 
 export const { hoverCountry, unHoverCountry } = africaSlice.actions
 
