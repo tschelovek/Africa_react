@@ -4,10 +4,13 @@ import { RootState } from "../../../../app/store"
 import {
   hoverCountry,
   selectIsHoverById,
+  TCountryId,
   unHoverCountry,
 } from "../../africaSlice"
 
 interface IAlgeriaProps extends ICountryProps {}
+
+const id: TCountryId = "algeria"
 
 function Algeria(props: IAlgeriaProps) {
   const componentStyle: ICountryStyle = {
@@ -15,16 +18,16 @@ function Algeria(props: IAlgeriaProps) {
   }
 
   const handleMouseOver = () => {
-    props.hoverCountry("algeria")
+    props.hoverCountry(id)
   }
   const handleMouseOut = () => {
-    props.unHoverCountry("algeria")
+    props.unHoverCountry(id)
   }
 
   return (
     <>
       <path
-        data-country-id="algeria"
+        data-country-id={id}
         data-flag-src="./images/algeria.svg"
         stroke="white"
         strokeWidth="1"
@@ -35,7 +38,7 @@ function Algeria(props: IAlgeriaProps) {
         style={componentStyle}
       />
       <circle
-        data-marker-border-id="algeria"
+        data-marker-border-id={id}
         cx="798.5"
         cy="62.5"
         r="7.4"
@@ -45,7 +48,7 @@ function Algeria(props: IAlgeriaProps) {
         onMouseLeave={handleMouseOut}
       />
       <circle
-        data-marker-id="algeria"
+        data-marker-id={id}
         cx="798.5"
         cy="62.5"
         r="6.14754"
@@ -59,7 +62,7 @@ function Algeria(props: IAlgeriaProps) {
 
 export default connect(
   (state: RootState) => ({
-    isHovered: selectIsHoverById(state, "algeria"),
+    isHovered: selectIsHoverById(state, id),
   }),
   { hoverCountry, unHoverCountry },
 )(Algeria)

@@ -4,10 +4,13 @@ import { RootState } from "../../../../app/store"
 import {
   hoverCountry,
   selectIsHoverById,
+  TCountryId,
   unHoverCountry,
 } from "../../africaSlice"
 
 interface IKenyaProps extends ICountryProps {}
+
+const id: TCountryId = "kenya"
 
 function Kenya(props: IKenyaProps) {
   const componentStyle: ICountryStyle = {
@@ -15,16 +18,16 @@ function Kenya(props: IKenyaProps) {
   }
 
   const handleMouseOver = () => {
-    props.hoverCountry("kenya")
+    props.hoverCountry(id)
   }
   const handleMouseOut = () => {
-    props.unHoverCountry("kenya")
+    props.unHoverCountry(id)
   }
 
   return (
     <>
       <path
-        data-country-id="kenya"
+        data-country-id={id}
         data-flag-src="./images/kenya.svg"
         stroke="white"
         strokeWidth="1"
@@ -35,7 +38,7 @@ function Kenya(props: IKenyaProps) {
         style={componentStyle}
       />
       <circle
-        data-marker-border-id="kenya"
+        data-marker-border-id={id}
         cx="986.5"
         cy="204.5"
         r="7.4"
@@ -45,7 +48,7 @@ function Kenya(props: IKenyaProps) {
         onMouseLeave={handleMouseOut}
       />
       <circle
-        data-marker-id="kenya"
+        data-marker-id={id}
         cx="986.5"
         cy="204.5"
         r="6.14754"
@@ -59,7 +62,7 @@ function Kenya(props: IKenyaProps) {
 
 export default connect(
   (state: RootState) => ({
-    isHovered: selectIsHoverById(state, "kenya"),
+    isHovered: selectIsHoverById(state, id),
   }),
   { hoverCountry, unHoverCountry },
 )(Kenya)

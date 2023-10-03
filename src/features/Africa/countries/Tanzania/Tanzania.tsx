@@ -3,11 +3,14 @@ import { RootState } from "../../../../app/store"
 import {
   hoverCountry,
   selectIsHoverById,
+  TCountryId,
   unHoverCountry,
 } from "../../africaSlice"
 import { ICountryProps, ICountryStyle } from "../../Africa"
 
 interface ITanzaniaProps extends ICountryProps {}
+
+const id: TCountryId = "tanzania"
 
 function Tanzania(props: ITanzaniaProps) {
   const componentStyle: ICountryStyle = {
@@ -15,16 +18,16 @@ function Tanzania(props: ITanzaniaProps) {
   }
 
   const handleMouseOver = () => {
-    props.hoverCountry("tanzania")
+    props.hoverCountry(id)
   }
   const handleMouseOut = () => {
-    props.unHoverCountry("tanzania")
+    props.unHoverCountry(id)
   }
 
   return (
     <>
       <path
-        data-country-id="tanzania"
+        data-country-id={id}
         data-flag-src="./images/tanzania.svg"
         stroke="white"
         strokeWidth="1"
@@ -35,7 +38,7 @@ function Tanzania(props: ITanzaniaProps) {
         style={componentStyle}
       />
       <circle
-        data-marker-border-id="tanzania"
+        data-marker-border-id={id}
         cx="959.5"
         cy="240.5"
         r="7.4"
@@ -45,7 +48,7 @@ function Tanzania(props: ITanzaniaProps) {
         onMouseLeave={handleMouseOut}
       />
       <circle
-        data-marker-id="tanzania"
+        data-marker-id={id}
         cx="959.5"
         cy="240.5"
         r="6.14754"
@@ -59,7 +62,7 @@ function Tanzania(props: ITanzaniaProps) {
 
 export default connect(
   (state: RootState) => ({
-    isHovered: selectIsHoverById(state, "tanzania"),
+    isHovered: selectIsHoverById(state, id),
   }),
   { hoverCountry, unHoverCountry },
 )(Tanzania)

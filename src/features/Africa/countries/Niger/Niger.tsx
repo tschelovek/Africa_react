@@ -4,10 +4,13 @@ import { RootState } from "../../../../app/store"
 import {
   hoverCountry,
   selectIsHoverById,
+  TCountryId,
   unHoverCountry,
 } from "../../africaSlice"
 
 interface INigerProps extends ICountryProps {}
+
+const id: TCountryId = "niger"
 
 function Niger(props: INigerProps) {
   const componentStyle: ICountryStyle = {
@@ -15,16 +18,16 @@ function Niger(props: INigerProps) {
   }
 
   const handleMouseOver = () => {
-    props.hoverCountry("niger")
+    props.hoverCountry(id)
   }
   const handleMouseOut = () => {
-    props.unHoverCountry("niger")
+    props.unHoverCountry(id)
   }
 
   return (
     <>
       <path
-        data-country-id="niger"
+        data-country-id={id}
         data-flag-src="./images/niger.svg"
         stroke="white"
         strokeWidth="1"
@@ -35,7 +38,7 @@ function Niger(props: INigerProps) {
         style={componentStyle}
       />
       <circle
-        data-marker-border-id="niger"
+        data-marker-border-id={id}
         cx="835.5"
         cy="117.5"
         r="7.4"
@@ -45,7 +48,7 @@ function Niger(props: INigerProps) {
         onMouseLeave={handleMouseOut}
       />
       <circle
-        data-marker-id="niger"
+        data-marker-id={id}
         cx="835.5"
         cy="117.5"
         r="6.14754"
@@ -59,7 +62,7 @@ function Niger(props: INigerProps) {
 
 export default connect(
   (state: RootState) => ({
-    isHovered: selectIsHoverById(state, "niger"),
+    isHovered: selectIsHoverById(state, id),
   }),
   { hoverCountry, unHoverCountry },
 )(Niger)

@@ -1,30 +1,35 @@
 import {
   hoverCountry,
   selectIsHoverById,
+  TCountryId,
   unHoverCountry,
 } from "../../africaSlice"
 import { ICountryProps, ICountryStyle } from "../../Africa"
 import { connect } from "react-redux"
 import { RootState } from "../../../../app/store"
+import { useRef } from "react"
 
 interface IZimbabweProps extends ICountryProps {}
 
+const id: TCountryId = "zimbabwe"
+
 function Zimbabwe(props: IZimbabweProps) {
+  const markerRef = useRef(null)
   const componentStyle: ICountryStyle = {
     fill: props.isHovered ? "rosybrown" : "",
   }
 
   const handleMouseOver = () => {
-    props.hoverCountry("zimbabwe")
+    props.hoverCountry(id)
   }
   const handleMouseOut = () => {
-    props.unHoverCountry("zimbabwe")
+    props.unHoverCountry(id)
   }
 
   return (
     <>
       <path
-        data-country-id="zimbabwe"
+        data-country-id={id}
         data-flag-src="./images/zimbabwe.svg"
         stroke="white"
         strokeWidth="1"
@@ -35,7 +40,7 @@ function Zimbabwe(props: IZimbabweProps) {
         style={componentStyle}
       />
       <circle
-        data-marker-border-id="zimbabwe"
+        data-marker-border-id={id}
         cx="941.5"
         cy="314.5"
         r="7.4"
@@ -43,9 +48,10 @@ function Zimbabwe(props: IZimbabweProps) {
         strokeWidth="0.2"
         onMouseEnter={handleMouseOver}
         onMouseLeave={handleMouseOut}
+        ref={markerRef}
       />
       <circle
-        data-marker-id="zimbabwe"
+        data-marker-id={id}
         cx="941.5"
         cy="314.5"
         r="6.14754"
@@ -59,7 +65,7 @@ function Zimbabwe(props: IZimbabweProps) {
 
 export default connect(
   (state: RootState) => ({
-    isHovered: selectIsHoverById(state, "zimbabwe"),
+    isHovered: selectIsHoverById(state, id),
   }),
   { hoverCountry, unHoverCountry },
 )(Zimbabwe)
